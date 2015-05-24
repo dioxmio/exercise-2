@@ -37,15 +37,4 @@ Backbone.sync = function(method, model, options) {
 	return sync;
 };
 
-$.ajaxSetup({
-    cache: false,
-    statusCode: {
-        //that is the error code that ECAS will throw when missing Auth
-        303: function () {
-            App.vent.trigger('notify:error', { title : 'Auth Error', text: 'Restarting so auth can take place.' });
-            setTimeout(function(){ location.reload(); }, 2500);
-        }
-    }
-});
-
 module.exports = Backbone;
