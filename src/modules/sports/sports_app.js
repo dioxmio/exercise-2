@@ -7,13 +7,17 @@ App.initModule("Sports");
 App.Sports.Router = App.Router.extend({
 	appRoutes : {
 		"" : "listSports",
+		"events/:id": "listEvents"
 	}
 });
 
 var API = {
-	listSports : function(id) {
-		return new App.Sports.Controller.List();
-	}
+	listSports: function(id) {
+		return new App.Sports.Controller.ListSports();
+	},
+	listEvents: function(id) {
+		return new App.Sports.Controller.ListEvents({"id":id});
+	} 
 };
 
 App.addInitializer(function() {
@@ -25,4 +29,9 @@ App.addInitializer(function() {
 App.Sports.on("sports:listSports", function() {
 	Backbone.history.navigate("");
 	API.listSports();
+});
+
+App.Sports.on("sports:listEvents", function(id) {
+	Backbone.history.navigate("events/" + id);
+	API.listEvents(id);
 });

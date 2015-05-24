@@ -104,10 +104,6 @@ select {
 }
 
 /* navigation */
-#content {
-    margin-top: 45px;
-}
-
 .displayNone {
     display: none;
 }
@@ -202,7 +198,7 @@ select {
 }
 
 #content {
-  margin-top: 60px !important;
+  margin-top: 15px;
 }
 
 @-webkit-keyframes load8 {

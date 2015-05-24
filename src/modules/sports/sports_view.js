@@ -13,9 +13,7 @@ var ListSports = React.createClass({
         this.props.sportSelected(id);
     },
     render: function() {
-        console.log("here I am");
         var listSportsData = this.props.collection.map(function(item){
-            console.log("item");
             return <tr onClick={this.itemSelected.bind(this,item.get('id'))} key={item.get('id')}>
                 <td>{item.get('title')}</td>
               </tr>;
@@ -64,14 +62,96 @@ var Sports = React.createClass({
     }
 });
 
-App.Sports.View.List = Backbone.View.extend({
+App.Sports.View.ListSports = Backbone.View.extend({
     sportSelected: function(id){
-        this.trigger('sports:selected',id);
+        this.trigger('sports:selectedSport',id);
     },
     render: function() {
         React.render(
             <Sports
                 sportSelected={this.sportSelected.bind(this)}
+                collection={this.collection} />,
+            App.Region.main()
+        );
+    }
+});
+
+var ListEvents = React.createClass({
+    itemSelected: function(id) {
+        this.props.sportSelected(id);
+    },
+    render: function() {
+        var listSportsData = this.props.collection.map(function(item){
+            return <tr onClick={this.itemSelected.bind(this,item.get('id'))} key={item.get('id')}>
+                <td>{item.get('title')}</td>
+                <td>{item.get('event_type')}</td>
+                <td>{item.get('home_team')}</td>
+                <td>{item.get('away_team')}</td>
+                <td>{item.get('status')}</td>
+              </tr>;
+        }, this);
+        return (
+            <div className="table-responsive">
+                <table className="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Event Type</th>
+                            <th>Home Team</th>
+                            <th>Away Team</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {listSportsData}
+                    </tbody>
+                </table>
+                <Components.EmptyList collection={this.props.collection} />
+            </div>
+        );
+    }
+});
+
+var Events = React.createClass({
+    mixins: [App.BackboneMixin],
+    getBackboneModels: function() {
+        return [this.props.collection];
+    },
+    handleBack: function() {
+        this.props.handleBack();
+    },
+    render: function() {
+        return (
+            <div>
+                <button type="button" onClick={this.handleBack} className="btn btn-link btn-app"> {'<- back to sports'}</button>
+                <div className="row">
+                    <div className="col-xs-12 col-md-9">
+                      <h1 className="top-10 bottom-5">Events</h1>
+                    </div>
+                </div>
+                <hr/>
+                <Components.loading model={this.props.collection} modal={false}>
+                    <ListEvents
+                        sportSelected={this.props.sportSelected}
+                        collection={this.props.collection} />
+                </Components.loading>
+            </div>
+        );
+    }
+});
+
+App.Sports.View.ListEvents = Backbone.View.extend({
+    sportSelected: function(id){
+        this.trigger('sports:selectedEvent',id);
+    },
+    handleBack: function() {
+        this.trigger('sports:listSports'); 
+    },
+    render: function() {
+        React.render(
+            <Events
+                sportSelected={this.sportSelected.bind(this)}
+                handleBack={this.handleBack.bind(this)}
                 collection={this.collection} />,
             App.Region.main()
         );
