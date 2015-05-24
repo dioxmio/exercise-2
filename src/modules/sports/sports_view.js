@@ -50,12 +50,10 @@ var Sports = React.createClass({
                     </div>
                 </div>
                 <hr/>
-                <Components.paginationSummaryComponent collection={this.props.collection}/>
                 <Components.loading model={this.props.collection} modal={false}>
                     <ListSports
                         sportSelected={this.props.sportSelected}
                         collection={this.props.collection} />
-                    <Components.paginationComponent collection={this.props.collection}/>
                 </Components.loading>
             </div>
         );

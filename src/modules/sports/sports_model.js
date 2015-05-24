@@ -4,7 +4,7 @@ import App from '../../app.js';
 
 App.initModule("Sports", "Model");
 
-App.Sports.Model.ListSports = App.Paginated.extend({
+App.Sports.Model.ListSports = Backbone.Collection.extend({
     url: function() {
         return App.url('/sports',this)
     }

@@ -21,7 +21,7 @@ App.initModule = function(moduleName, property) {
 }
 
 App.url = function(relativeUrl, model) {
-	var url = 'http://localhost:8082/betvictor_api';
+	var url = '/betvictor_api';
 	if (model && model.get('id')) {
 		relativeUrl += "/" + model.get('id');
 	}
