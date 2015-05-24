@@ -1,0 +1,36 @@
+{
+  "name": "example",
+  "version": "0.0.1",
+  "browserify": {
+    "transform": [
+      "debowerify"
+    ]
+  },
+  "devDependencies": {
+    "babelify": "~6.0.2",
+    "backbone": "1.1.2",
+    "backbone.marionette": "^2.2.0",
+    "backbone.paginator": "~2.0.2",
+    "backbone.validation": "~0.7.1",
+    "bootstrap": "~3.3.2",
+    "browserify": "~9.0.3",
+    "debowerify": "^1.2.0",
+    "gulp": "~3.8.11",
+    "gulp-babel": "~5.1.0",
+    "gulp-browserify": "~0.5.1",
+    "gulp-concat": "~2.5.2",
+    "gulp-concat-css": "~2.2.0",
+    "gulp-uglify": "^1.2.0",
+    "jquery": "^2.1.1",
+    "react": "~0.12.2",
+    "react-bootstrap": "~0.15.1",
+    "reactify": "~1.0.0",
+    "text": "~0.1.0",
+    "underscore": "1.8.2",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "vinyl-transform": "^1.0.0",
+    "vinyl-source-stream": "~1.1.0",
+    "vinyl-buffer": "~1.0.0"
+  }
+}
