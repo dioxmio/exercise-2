@@ -9,12 +9,48 @@ describe("Sports.App", function(){
 
   it("App list sports",function(){
 
-    var sportsApi = Sinon.stub(App.API, "listEvents");
+    var stubSportsApi = Sinon.stub(App.API, "listSports");
+    var stubNavigate = Sinon.stub(Backbone.history, "navigate");
 
-    App.Sports.trigger("sports:listEvents","1");
+    App.Sports.trigger("sports:listSports");
 
-    expect(sportsApi.called).toBeTruthy();
-    sportsApi.restore();
+    expect(stubSportsApi.called).toBeTruthy();
+    expect(stubNavigate.withArgs("").called).toBeTruthy();
+
+    stubSportsApi.restore();
+    stubNavigate.restore();
+
+  });
+
+   it("App list events",function(){
+
+    var id = 1;
+    var stubEventsApi = Sinon.stub(App.API, "listEvents");
+    var stubNavigate = Sinon.stub(Backbone.history, "navigate");
+
+    App.Sports.trigger("sports:listEvents",id);
+
+    expect(stubEventsApi.called).toBeTruthy();
+    expect(stubNavigate.withArgs("events/"+id).called).toBeTruthy();
+
+    stubEventsApi.restore();
+    stubNavigate.restore();
+
+  });
+
+  it("App list outcomes",function(){
+
+    var params = { "sport_id":1, "event_id":2 };
+    var stubEventsApi = Sinon.stub(App.API, "listOutcomes");
+    var stubNavigate = Sinon.stub(Backbone.history, "navigate");
+
+    App.Sports.trigger("sports:listOutcomes",params);
+
+    expect(stubEventsApi.called).toBeTruthy();
+    expect(stubNavigate.withArgs("events/" + params.sport_id  + "/outcomes/" + params.event_id).called).toBeTruthy();
+
+    stubEventsApi.restore();
+    stubNavigate.restore();
 
   });
 
