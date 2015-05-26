@@ -1,7 +1,7 @@
-import Backbone from 'backbone';
-import Paginator from 'backbone.paginator';
-import _ from 'underscore';
-import App from '../app.js';
+var Backbone = require('backbone');
+var Paginator = require('backbone.paginator');
+var _ = require('underscore');
+var App = require('../app.js');
 
 Backbone.Paginator = Paginator;
 

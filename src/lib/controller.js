@@ -1,8 +1,8 @@
-import Backbone from 'backbone';
+var Backbone = require('backbone');
 
 var Marionette = require('backbone.marionette');
-import _ from 'underscore';
-import App from '../app.js';
+var _ = require('underscore');
+var App = require('../app.js');
 
 App.Controller = {};
 

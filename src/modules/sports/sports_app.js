@@ -1,6 +1,6 @@
-import controller from './sports_controller';
-import Backbone from 'backbone';
-import App from '../../app.js';
+var controller = require('./sports_controller');
+var Backbone = require('backbone');
+var App = require('../../app.js');
 
 App.initModule("Sports");
 
@@ -44,3 +44,7 @@ App.Sports.on("sports:listOutcomes", function(attributes) {
 	Backbone.history.navigate("events/" + attributes.sport_id  + "/outcomes/" + attributes.event_id);
 	API.listOutcomes(attributes.sport_id, attributes.event_id);
 });
+
+App.API = API;
+
+module.exports = App;

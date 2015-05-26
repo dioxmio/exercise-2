@@ -1,6 +1,6 @@
-import Backbone from 'backbone'; 
-import _ from 'underscore';
-import App from '../../app.js';
+var Backbone = require('backbone'); 
+var _ = require('underscore');
+var App = require('../../app.js');
 
 App.initModule("Sports", "Model");
 
@@ -42,3 +42,5 @@ App.reqres.setHandler('sports:listOutcomes', function(ids, options){
     model.fetch(_.extend({cache: false}, options || {}));
     return model;
 });
+
+module.exports = App;

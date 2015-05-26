@@ -1,20 +1,21 @@
 //Init Backbone
-import Backbone from 'backbone';
-import BackboneSync from './lib/sync.js';
+var Backbone = require('backbone');
+var BackboneSync = require('./lib/sync.js');
+var $ = require('jquery');
 Backbone.$ = $;
 
 //Init application
-import app from './app.js';
-import $ from 'jquery';
+var app = require('./app.js');
+
 
 //Application Dependencies
-import react_components from './lib/react_components.js';
-import regions from './lib/regions.js';
-import controller from './lib/controller.js';
-import mixin from './lib/mixin.js';
-import paginated from './lib/paginated.js';
+var react_components = require('./lib/react_components.js');
+var regions = require('./lib/regions.js');
+var controller = require('./lib/controller.js');
+var mixin = require('./lib/mixin.js');
+var paginated = require('./lib/paginated.js');
 // Application Modules
-import sports_app from './modules/sports/sports_app.js';
+var sports_app = require('./modules/sports/sports_app.js');
 
 $(document).ready(function() {
     app.start();

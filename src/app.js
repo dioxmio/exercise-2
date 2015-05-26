@@ -1,9 +1,8 @@
-"use strict";
 
-import Backbone from 'backbone';
-import $ from 'jquery';
+var Backbone = require('backbone');
+var $ = require('jquery');
 Backbone.$ = $;
-import _ from 'underscore';
+var _ = require('underscore');
 var Marionette = require('backbone.marionette');
 
 var App = new Backbone.Marionette.Application();

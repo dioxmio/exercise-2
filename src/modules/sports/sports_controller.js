@@ -1,19 +1,22 @@
-import view from './sports_view.js';
-import App from '../../app.js';
+var view = require('./sports_view.js');
+var App = require('../../app.js');
 
 App.initModule("Sports", "Controller");
 
 App.Sports.Controller.ListSports = App.Controller.Base.extend({
 	initialize : function(options) {
 	  this.collection = App.request('sports:listSports');
-		this.view = new App.Sports.View.ListSports({
-			collection : this.collection,
-		});
+	  this.view = this.getView(this.collection);
 		this.show(this.view);
 		this.listenTo(this.view, 'sports:selectedSport', this.selectedSport);
 	},
 	selectedSport: function(id) {
 			App.Sports.trigger("sports:listEvents",id);
+	},
+	getView: function(collection) {
+		return new App.Sports.View.ListSports({
+			collection : collection,
+		});
 	}
 });
 
@@ -50,3 +53,6 @@ App.Sports.Controller.ListOutcomes = App.Controller.Base.extend({
 			App.Sports.trigger("sports:listEvents",this.options.sport_id);
 	}
 });
+
+//easier for testing
+module.exports = App;

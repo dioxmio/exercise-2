@@ -1,20 +1,21 @@
-import model from './sports_model.js';
-import Backbone from 'backbone';
-import React from 'react/addons';
-import ReactBootstrap from 'react-bootstrap';
-import Components from '../../lib/react_components.js';
-import $ from 'jquery';
-import App from '../../app.js';
+var model = require('./sports_model.js');
+var Backbone = require('backbone');
+var React = require('react/addons');
+var ReactBootstrap = require('react-bootstrap');
+var Components = require('../../lib/react_components.js');
+var $ = require('jquery');
+var App = require('../../app.js');
 
 App.initModule("Sports", "View");
+App.Sports.View.Components = {};
 
-var ListSports = React.createClass({
+App.Sports.View.Components.ListSports = React.createClass({
     itemSelected: function(id) {
         this.props.sportSelected(id);
     },
     render: function() {
         var listSportsData = this.props.collection.map(function(item){
-            return <tr onClick={this.itemSelected.bind(this,item.get('id'))} key={item.get('id')}>
+            return <tr onClick={this.itemSelected.bind(this,item.get('id'))} ref={"sportItem"+item.get('id')} key={item.get('id')}>
                 <td>{item.get('title')}</td>
               </tr>;
         }, this);
@@ -36,7 +37,7 @@ var ListSports = React.createClass({
     }
 });
 
-var Sports = React.createClass({
+App.Sports.View.Components.Sports = React.createClass({
     mixins: [App.BackboneMixin],
     getBackboneModels: function() {
         return [this.props.collection];
@@ -51,7 +52,7 @@ var Sports = React.createClass({
                 </div>
                 <hr/>
                 <Components.loading model={this.props.collection} modal={false}>
-                    <ListSports
+                    <App.Sports.View.Components.ListSports
                         sportSelected={this.props.sportSelected}
                         collection={this.props.collection} />
                 </Components.loading>
@@ -64,17 +65,22 @@ App.Sports.View.ListSports = Backbone.View.extend({
     sportSelected: function(id){
         this.trigger('sports:selectedSport',id);
     },
+    reactRender: function() {
+        return (
+            <App.Sports.View.Components.Sports
+                sportSelected={this.sportSelected.bind(this)}
+                collection={this.collection} />
+        );
+    },
     render: function() {
         React.render(
-            <Sports
-                sportSelected={this.sportSelected.bind(this)}
-                collection={this.collection} />,
+            this.reactRender(),
             App.Region.main()
         );
     }
 });
 
-var ListEvents = React.createClass({
+App.Sports.View.Components.ListEvents = React.createClass({
     itemSelected: function(id) {
         this.props.eventSelected(id);
     },
@@ -110,7 +116,7 @@ var ListEvents = React.createClass({
     }
 });
 
-var Events = React.createClass({
+App.Sports.View.Components.Events = React.createClass({
     mixins: [App.BackboneMixin],
     getBackboneModels: function() {
         return [this.props.collection];
@@ -129,7 +135,7 @@ var Events = React.createClass({
                 </div>
                 <hr/>
                 <Components.loading model={this.props.collection} modal={false}>
-                    <ListEvents
+                    <App.Sports.View.Components.ListEvents
                         eventSelected={this.props.eventSelected}
                         collection={this.props.collection} />
                 </Components.loading>
@@ -147,7 +153,7 @@ App.Sports.View.ListEvents = Backbone.View.extend({
     },
     render: function() {
         React.render(
-            <Events
+            <App.Sports.View.Components.Events
                 eventSelected={this.eventSelected.bind(this)}
                 handleBack={this.handleBack.bind(this)}
                 collection={this.collection} />,
@@ -156,7 +162,7 @@ App.Sports.View.ListEvents = Backbone.View.extend({
     }
 });
 
-var ListOutcomes = React.createClass({
+App.Sports.View.Components.ListOutcomes = React.createClass({
     render: function() {
         var listSportsData = this.props.collection.map(function(item){
             return <tr key={item.get('id')}>
@@ -187,7 +193,7 @@ var ListOutcomes = React.createClass({
     }
 });
 
-var Outcomes = React.createClass({
+App.Sports.View.Components.Outcomes = React.createClass({
     mixins: [App.BackboneMixin],
     getBackboneModels: function() {
         return [this.props.collection];
@@ -206,7 +212,7 @@ var Outcomes = React.createClass({
                 </div>
                 <hr/>
                 <Components.loading model={this.props.collection} modal={false}>
-                    <ListOutcomes
+                    <App.Sports.View.Components.ListOutcomes
                         collection={this.props.collection} />
                 </Components.loading>
             </div>
@@ -220,10 +226,12 @@ App.Sports.View.ListOutcomes = Backbone.View.extend({
     },
     render: function() {
         React.render(
-            <Outcomes
+            <App.Sports.View.Components.Outcomes
                 handleBack={this.handleBack.bind(this)}
                 collection={this.collection} />,
             App.Region.main()
         );
     }
 });
+
+module.exports = App;

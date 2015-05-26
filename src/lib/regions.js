@@ -1,6 +1,6 @@
-import $ from 'jquery';
-import React from 'react/addons';
-import App from '../app.js';
+var $ = require('jquery');
+var React = require('react/addons');
+var App = require('../app.js');
 
 App.Region = {
 	show : function(view) {

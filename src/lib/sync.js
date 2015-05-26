@@ -1,7 +1,7 @@
-import Backbone from 'backbone';
-import _ from 'underscore';
-import $ from 'jquery';
-import App from '../app.js';
+var Backbone = require('backbone');
+var _ = require('underscore');
+var $ = require('jquery');
+var App = require('../app.js');
 // Store the native, default sync method, we'll wrap this.
 Backbone._nativeSync = Backbone.sync;
 

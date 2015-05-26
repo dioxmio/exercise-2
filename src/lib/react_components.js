@@ -1,6 +1,6 @@
-import React from 'react/addons';
-import _ from 'underscore';
-import $ from 'jquery';
+var React = require('react/addons');
+var _ = require('underscore');
+var $ = require('jquery');
 
 var Components = {};
 

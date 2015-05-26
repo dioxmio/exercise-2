@@ -1,4 +1,4 @@
-import App from '../app.js';
+var App = require('../app.js');
 // An example generic Mixin that you can add to any component that should react
 // to changes in a Backbone component. The use cases we've identified thus far
 // are for Collections -- since they trigger a change event whenever any of
