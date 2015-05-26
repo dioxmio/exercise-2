@@ -141,12 +141,13 @@ var Components = {};
       return false;
     },
     hasFinishedSavingArray: function(modelArray) {
+      var finished = true;
       _.each(modelArray, function(item){
         if(!this.hasFinishedSavingItem(item)){
-          return false;
+          finished = false;
         }
       },this);
-      return true;
+      return finished;
     },
     hasFinishedLoadingItem: function(item) {
       if(!item._fetch || item._fetch.state() != "pending") {
@@ -155,12 +156,13 @@ var Components = {};
       return false;
     },
     hasFinishedLoadingArray: function(modelArray) {
+      var finished = true;
       _.each(modelArray, function(item){
         if(!this.hasFinishedLoadingItem(item)){
-          return false;
+          finished = false;
         }
       },this);
-      return true;
+      return finished;
     },
     hasFinishedLoading: function() {
       if( Object.prototype.toString.call(this.props.model) === '[object Array]' ) {
@@ -177,12 +179,12 @@ var Components = {};
       }
     },
     render: function() {
-        var children = <div className="app-loader"/>;
+        var children = <div ref="loader" className="app-loader"/>;
         if(this.hasFinishedSaving(this.props.model) && this.hasFinishedLoading(this.props.model)) {
             return <div>{this.props.children}</div>;
         }
         if(this.props.modal === true) {
-            children = <div className="cover">{this.props.children}<div className="save-spining"></div><div className="save-loader"></div></div>;
+            children = <div ref="modal" className="cover">{this.props.children}<div className="save-spining"></div><div className="save-loader"></div></div>;
         }
         return children;
     }
