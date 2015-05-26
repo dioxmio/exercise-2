@@ -7,9 +7,17 @@ var gulp = require('gulp'),
     babelify = require('babelify'),
     uglify = require('gulp-uglify')
     source = require('vinyl-source-stream'),
-    buffer = require('vinyl-buffer');
+    buffer = require('vinyl-buffer'),
+    karma = require('karma').server,
+    path = require('path');
 
 
+function runKarma(configFile, cb) {
+   karma.start({
+      configFile: path.resolve(configFile),
+      singleRun: false
+   }, cb);
+}
 
 gulp.task('cssConcat', function () {
   return gulp.src([
@@ -20,6 +28,10 @@ gulp.task('cssConcat', function () {
     ])
     .pipe(concat("styles.css"))
     .pipe(gulp.dest('./dest'));
+});
+
+gulp.task('test', function(cb) {
+    runKarma('spec/karma.conf.js', cb);
 });
 
 gulp.task('browserify', function() {
