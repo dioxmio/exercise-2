@@ -15,7 +15,7 @@ var gulp = require('gulp'),
 function runKarma(configFile, cb) {
    karma.start({
       configFile: path.resolve(configFile),
-      singleRun: false
+      singleRun: true
    }, cb);
 }
 
